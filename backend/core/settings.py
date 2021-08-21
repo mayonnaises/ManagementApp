@@ -6,8 +6,6 @@ from pathlib import Path
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-# SETTINGS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# BASE_DIR = os.path.dirname(SETTINGS_DIR)
 
 DEBUG = True
 
