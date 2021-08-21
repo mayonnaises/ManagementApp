@@ -1,7 +1,6 @@
 """
 Django settings for backend project.
 """
-
 from pathlib import Path
 
 
@@ -21,6 +20,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'backend.api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
