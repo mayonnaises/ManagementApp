@@ -2,6 +2,12 @@
 node_modules
 /dist
 
+# django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
 
 # local env files
 .env.local
