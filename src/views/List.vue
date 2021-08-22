@@ -8,13 +8,13 @@
 <script>
 export default {
   name: 'List',
-  data () {
-    return {
-      employeeList: []
+  computed: {
+    employees: function () {
+      return this.$store.state.employees
     }
   },
-  methods: {
-
+  mounted () {
+    this.$store.dispatch('getEmployeeList')
   }
 }
 </script>
