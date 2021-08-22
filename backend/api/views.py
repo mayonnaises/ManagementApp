@@ -1,3 +1,12 @@
-from django.shortcuts import render
+# api/views.py
 
-# Create your views here.
+from rest_framework.views import APIView
+
+from .serializers import EmployeeDataSerializer
+
+
+class EmployeeListAPI(APIView):
+    '''Get employee list'''
+
+    def get(self, request):
+        pass
