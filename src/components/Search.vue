@@ -1,6 +1,6 @@
 <template>
   <div id="search_block">
-    <h2>Search page</h2>
+    <h1>Search page</h1>
     <form id="search_form">
       <input type="text" id="search_input" />
       <button type="submit" id="search_submit">Search</button>
@@ -20,8 +20,8 @@ export default {
 <style scoped>
 #search_input {
   width: 480px;
-  padding: 4px 6px;
-  font-size: 15px;
+  padding: 7px 8px;
+  font-size: 17px;
   font-weight: 600;
   color: #333;
 }
@@ -30,8 +30,8 @@ export default {
 }
 #search_submit {
   margin-left: 8px;
-  padding: 4px 3px;
-  font-size: 15px;
+  padding: 8px 5px;
+  font-size: 17px;
   color: #333;
   border-radius: 0;
 }
