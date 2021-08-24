@@ -20,5 +20,5 @@ class EmployeeListAPI(APIView):
 
     def get(self, request):
         employee_list = self.get_objects()
-        serializer = EmployeeDataSerializer(employee_list)
+        serializer = EmployeeDataSerializer(employee_list, many=True)
         return Response(serializer.data)

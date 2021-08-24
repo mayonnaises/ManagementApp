@@ -14,7 +14,6 @@ export default createStore({
   },
   actions: {
     getEmployeeList: function ({ commit }) {
-      // return axios.get('http://localhost:8000/api/employee_list/')
       return api.get('/employee_list/')
         .then(response => {
           commit('setEmployee', response.data)
