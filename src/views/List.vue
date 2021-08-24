@@ -1,7 +1,7 @@
 <template>
   <div class="list">
     <h1>List page</h1>
-    <div v-for="employee in $store.state.employees" :key="employee.id">
+    <div v-for="employee in employees" :key="employee.id">
       <p class="em-name">{{ employee.name }}</p>
       <p class="em-phone">{{ employee.phone_number }}</p>
     </div>

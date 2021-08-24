@@ -1,6 +1,25 @@
 <template>
   <div id="search_block">
     <h1>Search page</h1>
+    <form>
+      <div class="radio-wrapper">
+        <input
+          type="radio"
+          id="department_radio"
+          name="search_model"
+          value="department"
+          checked />
+        <label for="department_radio" class="search-choice-label">Department</label>
+      </div>
+      <div class="radio-wrapper">
+        <input
+          type="radio"
+          id="employee_radio"
+          name="search_model"
+          value="employee" />
+        <label for="employee_radio" class="search-choice-label">Employee</label>
+      </div>
+    </form>
     <form id="search_form">
       <input type="text" id="search_input" />
       <button type="submit" id="search_submit">Search</button>
@@ -18,6 +37,14 @@ export default {
 </script>
 
 <style scoped>
+.radio-wrapper {
+  display: inline-block;
+  margin: 0 15px 0;
+}
+.search-choice-label {
+  font-size: 16.5px;
+}
+#search_form { margin: 25px 0 0; }
 #search_input {
   width: 480px;
   padding: 7px 8px;
