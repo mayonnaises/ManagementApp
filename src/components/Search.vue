@@ -1,7 +1,7 @@
 <template>
   <div id="search_block">
     <h1>Search page</h1>
-    <form>
+    <div>
       <div class="radio-wrapper">
         <input
           type="radio"
@@ -19,11 +19,13 @@
           value="employee" />
         <label for="employee_radio" class="search-choice-label">Employee</label>
       </div>
-    </form>
-    <form id="search_form">
-      <input type="text" id="search_input" />
-      <button type="submit" id="search_submit">Search</button>
-    </form>
+    </div>
+    <div id="search_app">
+      <form id="search_form">
+        <input type="text" v-model="search" id="search_input" />
+        <button type="submit" id="search_submit">Search</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -32,6 +34,16 @@ export default {
   name: 'Search',
   props: {
     msg: String
+  },
+  data () {
+    return {
+      search: []
+    }
+  },
+  watch: {
+    search (inputText, oldText) {
+      console.log(inputText)
+    }
   }
 }
 </script>

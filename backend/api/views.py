@@ -22,3 +22,9 @@ class EmployeeListAPI(APIView):
         employee_list = self.get_objects()
         serializer = EmployeeDataSerializer(employee_list, many=True)
         return Response(serializer.data)
+
+
+class SearchFunc(APIView):
+
+    def get(self, request):
+        pass
