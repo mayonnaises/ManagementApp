@@ -24,7 +24,7 @@
       <form id="search_form">
         <input
           type="text"
-          v-model="searchResult"
+          v-model="searchWord"
           id="search_input"
           ref="get_user_input_window" />
         <button type="submit" id="search_submit">Search</button>
@@ -32,13 +32,16 @@
     </div>
   </div>
   <div id="search_result"
-    v-for="data in searchResult"
-    :key="data.id">
-    <p class="result-name">{{ data.name }}</p>
+    v-for="employee in searchEmployee"
+    :key="employee.id">
+    <p class="em-info employee-phone">{{ employee.phone_number }}</p>
+    <p class="em-info employee-name">{{ employee.name }}</p>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'Search',
   props: {
@@ -46,33 +49,33 @@ export default {
   },
   data () {
     return {
-      employeeData: [],
-      searchResult: []
+      searchWord: ''
     }
   },
   watch: {
     searchResult (inputText, oldText) {
-      console.log(inputText)
-      const resultsList = this.employeeData.filter(user => {
+      const resultsList = this.employees.filter(user => {
         return user.name.includes(inputText)
       })
       console.log(resultsList)
     }
   },
-  methods: {
-    filterTheData (userInput) {
-      const resultsList = this.employeeData.filter(user => {
-        return user.name.includes(userInput)
+  computed: {
+    searchEmployee: function () {
+      const word = this.searchWord.trim()
+
+      if (word === '') return this.employees
+
+      return this.employees.filter(user => {
+        return user.name.includes(word)
       })
-      this.searchResult = resultsList
-    }
+    },
+    ...mapState(['employees'])
   },
   mounted () {
     this.$store.dispatch('getEmployeeList')
-    this.employeeData = this.$store.state.employees
 
     this.$refs.get_user_input_window.focus()
-    console.log(this.employeeData)
   }
 }
 </script>
@@ -102,6 +105,10 @@ export default {
   font-size: 17px;
   color: #333;
   border-radius: 0;
+}
+.em-info {
+  display: inline-block;
+  margin: 15px 10px;
 }
 a {
   color: #42b983;
