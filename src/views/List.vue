@@ -18,6 +18,8 @@ export default {
   },
   mounted () {
     this.$store.dispatch('getEmployeeList')
+
+    console.log(this.$store.state.employees)
   }
 }
 </script>
