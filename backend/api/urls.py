@@ -12,5 +12,3 @@ urlpatterns = format_suffix_patterns([
     path('department_list/', DepartmentListAPI.as_view()),
     path('employee_list/', EmployeeListAPI.as_view()),
 ])
-
-# urlpatterns = format_suffix_patterns(urlpatterns)

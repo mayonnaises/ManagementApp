@@ -35,8 +35,16 @@ class DepartmentListAPI(APIView):
         except Department.DoesNotExist:
             raise Http404
 
+    def get_employee_name(self, serializer):
+        for data in serializer.data:
+            employee = Employee.objects.get(pk=data['employee'])
+            data['employee_name'] = employee.name
+
     def get(self, request):
         department_list = self.get_objects()
         serializer =  DepartmentDataSerializer(
             department_list, many=True)
+
+        self.get_employee_name(serializer)
+
         return Response(serializer.data)

@@ -22,12 +22,8 @@ class Employee(models.Model):
         _('name reading'),
         max_length=50
     )
-    phone_regex = RegexValidator(
-        regex=r'^\+?1?\d{9,14}$'
-    )
     phone_number = models.CharField(
         _('mobile number'),
-        validators=[phone_regex],
         max_length=14,
         blank=True,
         null=True
@@ -87,12 +83,8 @@ class Department(models.Model):
         blank=True,
         null=True
     )
-    phone_regex = RegexValidator(
-        regex=r'^\+?1?\d{9,14}$'
-    )
     phone_number = models.CharField(
         _('phone number'),
-        validators=[phone_regex],
         max_length=14,
         blank=True,
         null=True

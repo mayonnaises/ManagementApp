@@ -1,6 +1,5 @@
 <template>
   <div id="search_block">
-    <h1>Search page</h1>
     <div>
       <div class="radio-wrapper">
         <input
@@ -8,6 +7,8 @@
           id="department_radio"
           name="search_model"
           value="department"
+          v-model="picked"
+          @click="changeHolder"
           checked />
         <label for="department_radio" class="search-choice-label">Department</label>
       </div>
@@ -16,7 +17,9 @@
           type="radio"
           id="employee_radio"
           name="search_model"
-          value="employee" />
+          value="employee"
+          v-model="picked"
+          @click="changeHolder" />
         <label for="employee_radio" class="search-choice-label">Employee</label>
       </div>
     </div>
@@ -24,18 +27,26 @@
       <form id="search_form">
         <input
           type="text"
-          v-model="searchWord"
+          v-model.trim="searchWord"
           id="search_input"
-          ref="get_user_input_window" />
-        <button type="submit" id="search_submit">Search</button>
+          ref="get_user_input_window"
+          placeholder="Enter the department name here ..." />
       </form>
     </div>
   </div>
-  <div id="search_result"
-    v-for="employee in searchEmployee"
-    :key="employee.id">
-    <p class="em-info employee-phone">{{ employee.phone_number }}</p>
-    <p class="em-info employee-name">{{ employee.name }}</p>
+  <div id="result_table_heading">
+    <p class="table-heading-content">Name</p>
+    <p class="table-heading-content">Phone number</p>
+    <p class="table-heading-content">Representative</p>
+  </div>
+  <div id="search_result_table">
+    <div class="results-grid"
+      v-for="data in searchData"
+      :key="data.id">
+      <p class="data-box data-name" v-html="highLight(data.name)"></p>
+      <p class="data-box phone" v-html="highLight(data.phone_number)"></p>
+      <p class="data-box" v-html="highLight(data.employee_name)"></p>
+    </div>
   </div>
 </template>
 
@@ -49,29 +60,58 @@ export default {
   },
   data () {
     return {
-      searchWord: ''
+      searchWord: '',
+      picked: 'department'
     }
   },
   computed: {
-    searchEmployee: function () {
-      const word = this.searchWord.trim()
+    searchData: function () {
+      const word = this.searchWord
 
-      if (word === '') return this.employees
+      if (word === '') return this.department
 
-      return this.employees.filter(user => {
-        return user.name.includes(word)
-      })
+      if (this.picked === 'department') {
+        return this.department.filter(data => {
+          return data.name.includes(word)
+        })
+      } else {
+        return this.department.filter(data => {
+          return data.employee_name.includes(word)
+        })
+      }
     },
     ...mapState(['employees', 'department'])
+  },
+  methods: {
+    highLight (text) {
+      const word = this.searchWord
+
+      if (word === '') return text
+      if (!text.includes(word)) return text
+
+      const re = new RegExp(word, 'ig')
+
+      return text.replace(re, function (searchWord) {
+        return '<span style="background-color:yellow;font-weight:bold">' +
+          searchWord +
+          '</span>'
+      })
+    },
+    changeHolder: function (event) {
+      const choice = event.target.value
+
+      if (choice === 'department') {
+        this.$refs.get_user_input_window.placeholder = 'Enter the department name here ...'
+      } else {
+        this.$refs.get_user_input_window.placeholder = 'Enter the employee name here ...'
+      }
+    }
   },
   mounted () {
     this.$store.dispatch('getDepartmentList')
     this.$store.dispatch('getEmployeeList')
 
     this.$refs.get_user_input_window.focus()
-
-    console.log(this.employees)
-    console.log(this.department)
   }
 }
 </script>
@@ -102,9 +142,23 @@ export default {
   color: #333;
   border-radius: 0;
 }
-.em-info {
-  display: inline-block;
-  margin: 15px 10px;
+#result_table_heading {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  height: 50px;width: 90%;
+  margin: 30px 5% 0;
+  background: lightgreen;
+}
+#search_result_table {
+  width: 90%;
+  margin: 0 5%;
+}
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  border-bottom: 1px solid #bababa;
+}
+.data-box {
 }
 a {
   color: #42b983;

@@ -1,5 +1,4 @@
 import { createStore } from 'vuex'
-// import axios from 'axios'
 import api from '@/services/api'
 import employee from './modules/employee'
 
@@ -17,7 +16,7 @@ export default createStore({
     }
   },
   actions: {
-    getDepartmentList ({ commit }) {
+    getDepartmentList: function ({ commit }) {
       return api.get('department_list/')
         .then(response => {
           commit('setDepartment', response.data)
