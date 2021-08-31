@@ -5,8 +5,11 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
-from .models import Employee
-from .serializers import EmployeeDataSerializer
+from .models import Department, Employee
+from .serializers import (
+    DepartmentDataSerializer,
+    EmployeeDataSerializer
+)
 
 
 class EmployeeListAPI(APIView):
@@ -24,7 +27,16 @@ class EmployeeListAPI(APIView):
         return Response(serializer.data)
 
 
-class SearchFunc(APIView):
+class DepartmentListAPI(APIView):
+
+    def get_objects(self):
+        try:
+            return Department.objects.all()
+        except Department.DoesNotExist:
+            raise Http404
 
     def get(self, request):
-        pass
+        department_list = self.get_objects()
+        serializer =  DepartmentDataSerializer(
+            department_list, many=True)
+        return Response(serializer.data)

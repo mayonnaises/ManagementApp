@@ -52,14 +52,6 @@ export default {
       searchWord: ''
     }
   },
-  watch: {
-    searchResult (inputText, oldText) {
-      const resultsList = this.employees.filter(user => {
-        return user.name.includes(inputText)
-      })
-      console.log(resultsList)
-    }
-  },
   computed: {
     searchEmployee: function () {
       const word = this.searchWord.trim()
@@ -70,12 +62,16 @@ export default {
         return user.name.includes(word)
       })
     },
-    ...mapState(['employees'])
+    ...mapState(['employees', 'department'])
   },
   mounted () {
+    this.$store.dispatch('getDepartmentList')
     this.$store.dispatch('getEmployeeList')
 
     this.$refs.get_user_input_window.focus()
+
+    console.log(this.employees)
+    console.log(this.department)
   }
 }
 </script>
