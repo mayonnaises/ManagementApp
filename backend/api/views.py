@@ -35,16 +35,37 @@ class DepartmentListAPI(APIView):
         except Department.DoesNotExist:
             raise Http404
 
-    def get_employee_name(self, serializer):
+    def get_employee_data(self, serializer):
         for data in serializer.data:
             employee = Employee.objects.get(pk=data['employee'])
             data['employee_name'] = employee.name
+            data['employee_phone'] = employee.phone_number
 
     def get(self, request):
         department_list = self.get_objects()
         serializer =  DepartmentDataSerializer(
             department_list, many=True)
 
-        self.get_employee_name(serializer)
+        self.get_employee_data(serializer)
 
         return Response(serializer.data)
+
+
+class DepartmentDetailAPI(APIView):
+
+    def get_object(self, pk):
+        try:
+            return Department.objects.get(pk=pk)
+        except Department.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        department = self.get_object(pk)
+        serializer = DepartmentDataSerializer(department)
+        data = serializer.data
+        employee = Employee.objects.get(pk=data['employee'])
+        data.update({
+            'employee_name': employee.name,
+            'employee_phone': employee.phone_number
+        })
+        return Response(data)

@@ -29,5 +29,6 @@ class DepartmentDataSerializer(ModelSerializer):
             'employee',
             'address',
             'phone_number',
+            'second_phone',
             'note'
         ]

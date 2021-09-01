@@ -43,9 +43,21 @@
     <div class="results-grid"
       v-for="data in searchData"
       :key="data.id">
-      <p class="data-box data-name" v-html="highLight(data.name)"></p>
-      <p class="data-box phone" v-html="highLight(data.phone_number)"></p>
-      <p class="data-box" v-html="highLight(data.employee_name)"></p>
+      <router-link :to="{name: 'Department', params: { departmentId: data.id }}" class="data-box data-name" v-html="highLight(data.name)"></router-link>
+      <div class="data-phone-wrapper">
+        <div>
+          <p class="data-phone phone-tag">固定：</p>
+          <p class="data-phone" v-html="highLight(data.phone_number)"></p>
+        </div>
+        <div>
+          <p class="data-phone second-phone phone-tag">社内：</p>
+          <p class="data-phone second-phone" v-html="highLight(data.second_phone)"></p>
+        </div>
+      </div>
+      <div class="data-employee-wrapper">
+        <router-link :to="{name: 'Department', params: { departmentId: data.id }}" class="data-employee employee-name" v-html="highLight(data.employee_name)"></router-link>
+        <p class="data-employee employee-phone" v-html="highLight(data.employee_phone)"></p>
+      </div>
     </div>
   </div>
 </template>
@@ -159,6 +171,48 @@ export default {
   border-bottom: 1px solid #bababa;
 }
 .data-box {
+}
+.data-name {
+  align-self: center;
+  color: #333;
+  text-decoration: none;
+}
+.data-name:hover {
+  color: #42b983;
+}
+.data-phone-wrapper {
+  align-self: center;
+}
+.data-phone {
+  display: inline-block;
+  margin: 12px 0 0;
+  font-size: 16px;
+}
+.phone-tag {
+  font-size: 15px;
+  color: #a1a1a1;
+}
+.second-phone {
+  margin-bottom: 10px;
+}
+.data-employee-wrapper {
+  align-self: center;
+}
+.data-employee {
+  margin: 12px 0 0;
+  font-size: 16px;
+}
+.employee-name {
+  display: inline-block;
+  margin: 12px 0 0;
+  color: #333;
+  text-decoration: none;
+}
+.employee-name:hover {
+  color: #42b983;
+}
+.employee-phone {
+  margin-bottom: 10px;
 }
 a {
   color: #42b983;

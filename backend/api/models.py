@@ -89,6 +89,11 @@ class Department(models.Model):
         blank=True,
         null=True
     )
+    second_phone = models.CharField(
+        max_length=14,
+        blank=True,
+        null=True
+    )
     note = models.TextField(
         _('note'),
         blank=True,
