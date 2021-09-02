@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <Search msg="Hello World"/>
+    <keep-alive>
+      <Search msg="Hello World"/>
+    </keep-alive>
   </div>
 </template>
 

@@ -104,7 +104,7 @@ export default {
       const re = new RegExp(word, 'ig')
 
       return text.replace(re, function (searchWord) {
-        return '<span style="background-color:yellow;font-weight:bold">' +
+        return '<span style="font-size: 1.6rem;font-weight: 600;color: #333;background: yellow;">' +
           searchWord +
           '</span>'
       })
@@ -117,6 +117,7 @@ export default {
       } else {
         this.$refs.get_user_input_window.placeholder = 'Enter the employee name here ...'
       }
+      this.$refs.get_user_input_window.focus()
     }
   },
   mounted () {
@@ -134,23 +135,22 @@ export default {
   margin: 0 15px 0;
 }
 .search-choice-label {
-  font-size: 16.5px;
+  margin-left: 10px;
+  font-size: 1.65rem;
 }
 #search_form { margin: 25px 0 0; }
 #search_input {
   width: 480px;
   padding: 7px 8px;
-  font-size: 17px;
+  font-size: 1.7rem;
   font-weight: 600;
   color: #333;
 }
-#search_input:focus {
-  border: none;
-}
+#search_input:focus { border: none; }
 #search_submit {
   margin-left: 8px;
   padding: 8px 5px;
-  font-size: 17px;
+  font-size: 1.7rem;
   color: #333;
   border-radius: 0;
 }
@@ -161,6 +161,11 @@ export default {
   margin: 30px 5% 0;
   background: lightgreen;
 }
+.table-heading-content {
+  align-self: center;
+  font-size: 1.6rem;
+  color: #333;
+}
 #search_result_table {
   width: 90%;
   margin: 0 5%;
@@ -170,37 +175,28 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   border-bottom: 1px solid #bababa;
 }
-.data-box {
-}
 .data-name {
   align-self: center;
+  font-size: 1.6rem;
   color: #333;
   text-decoration: none;
 }
-.data-name:hover {
-  color: #42b983;
-}
-.data-phone-wrapper {
-  align-self: center;
-}
+.data-name:hover { color: #42b983; }
+.data-phone-wrapper { align-self: center; }
 .data-phone {
   display: inline-block;
   margin: 12px 0 0;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 .phone-tag {
-  font-size: 15px;
+  font-size: 1.5rem;
   color: #a1a1a1;
 }
-.second-phone {
-  margin-bottom: 10px;
-}
-.data-employee-wrapper {
-  align-self: center;
-}
+.second-phone { margin-bottom: 10px; }
+.data-employee-wrapper { align-self: center; }
 .data-employee {
   margin: 12px 0 0;
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 .employee-name {
   display: inline-block;
@@ -208,13 +204,11 @@ export default {
   color: #333;
   text-decoration: none;
 }
-.employee-name:hover {
-  color: #42b983;
-}
-.employee-phone {
-  margin-bottom: 10px;
-}
-a {
-  color: #42b983;
+.employee-name:hover { color: #42b983; }
+.employee-phone { margin-bottom: 10px; }
+a { color: #42b983; }
+.result-highlight {
+  font-size: 1.6rem;
+  color: yellow;
 }
 </style>
